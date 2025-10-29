@@ -120,7 +120,7 @@ void ArrayList::Sort()
 {
     if (!m_Size || m_Size == 1)
     {
-        std::cout << "Not enough elements to sort!" << std::endl;
+        std::cout << "List underflow!" << std::endl;
         return;
     }
 
@@ -165,7 +165,6 @@ void ArrayList::Merge(unsigned int left, unsigned int mid, unsigned int right)
     while (rIndex <= right)
         array[i++] = m_Data[rIndex++];
     
-
     i = 0;
     for (unsigned int j = left; i < len; i++, j++)
         m_Data[j] = array[i];

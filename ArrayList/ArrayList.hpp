@@ -36,4 +36,10 @@ public:
 
     int& operator[](unsigned int index);
     friend std::ostream& operator << (std::ostream& stream, const ArrayList& list);
+
+
+    // Tasks
+    void RemoveDuplicates();
+    void PrintLongestSeq();
+    void PrintTriplets();
 };
