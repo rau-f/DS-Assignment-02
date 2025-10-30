@@ -42,4 +42,5 @@ public:
     void RemoveDuplicates();
     void PrintLongestSeq();
     void PrintTriplets();
+    void MoveZeros();
 };

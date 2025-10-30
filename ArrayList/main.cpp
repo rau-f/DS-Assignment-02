@@ -19,7 +19,7 @@ int main()
     ArrayList list(size);
 
     for (int i = 0; i < size; i++)
-        list.Insert(i, rand() % 10);
+        list.Insert(i, rand() % 7);
     
     std::cout << "\t(-: ARRAY LIST :-)\n" << std::endl;
     
@@ -36,7 +36,18 @@ int main()
     // list.PrintLongestSeq();
 
     // Task # 03
-    std::cout << "Task # 03: 3Sum" << std::endl;
-    std::cout << "List: " << list << std::endl;
-    list.PrintTriplets(); 
+    // std::cout << "Task # 03: 3Sum" << std::endl;
+    // for (int i = 0; i < size; i++)
+    //     list.Insert(i, (rand() % 10) - 5);
+    // std::cout << "List: " << list << std::endl;
+    // list.PrintTriplets();
+
+    // Task # 04
+    // std::cout << "Task # 04: Move Zeros To End" << std::endl;
+    // std::cout << "List: " << list << std::endl;
+    // list.MoveZeros();
+    // std::cout << "Zeros moved: " << list << std::endl;
+
+    // Task # 05: Majority Element (appearence > n/2)
+    
 }

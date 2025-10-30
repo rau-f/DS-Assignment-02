@@ -67,5 +67,30 @@ void ArrayList::PrintLongestSeq()
 // Task # 03: Find Triplets that Sum to Zero
 void ArrayList::PrintTriplets()
 {
+    for (unsigned int i = 0; i < m_Size; i++)
+        for (unsigned int j = i + 1; j < m_Size; j++)
+            for (unsigned int k = j + 1; k < m_Size; k++)
+            {
+                if (m_Data[i] + m_Data[j] + m_Data[k] == 0)
+                    std::cout << "[" << m_Data[i] << ", " << m_Data[j] << ", " << m_Data[k] << "]" << std::endl;
+            }
+}
 
+
+// Task # 03: Move Zeros To End
+void ArrayList::MoveZeros()
+{
+    unsigned int nonZeroSize = m_Size;
+    for (unsigned int i = 0; i < nonZeroSize; i++)
+    {
+        if (m_Data[i] == 0)
+        {
+            for (unsigned int j = i; j < nonZeroSize - 1; j++)
+                m_Data[j] = m_Data[j + 1];
+            
+            m_Data[nonZeroSize - 1] = 0;
+            nonZeroSize--;
+            i--;
+        }
+    }
 }
