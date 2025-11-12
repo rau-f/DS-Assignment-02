@@ -20,6 +20,7 @@ public:
     void DeleteValueAt(unsigned int index);
     void UpdateCapacity(unsigned int capacity);
     void Swap(int& a, int& b);
+    void Clear();
     void Print();
     unsigned int Search(int value);
 
@@ -43,4 +44,7 @@ public:
     void PrintLongestSeq();
     void PrintTriplets();
     void MoveZeros();
+    int FindMajorityElem();
+    int CountSubArrSum(int k);
+    int GetLongestSubArrayLen(int k);
 };

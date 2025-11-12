@@ -77,7 +77,7 @@ void ArrayList::PrintTriplets()
 }
 
 
-// Task # 03: Move Zeros To End
+// Task # 04: Move Zeros To End
 void ArrayList::MoveZeros()
 {
     unsigned int nonZeroSize = m_Size;
@@ -93,4 +93,90 @@ void ArrayList::MoveZeros()
             i--;
         }
     }
+}
+
+
+// Task # 05: Majority Element (Boyer-Moore Voting Algorithm)
+int ArrayList::FindMajorityElem()
+{
+    int candidate;
+    unsigned int votes = 0;
+
+    for (unsigned int i = 0; i < m_Size; i++)
+    {
+        if (votes == 0)
+        {
+            candidate = m_Data[i];
+            votes = 1;
+        }
+        else if (candidate == m_Data[i]) votes++;
+        else votes--;
+    }
+
+    // Even though it's guaranteed by the problem that majority element would always 
+    // exists like Leetcode problem 169, but I'm initializing array randomly,
+    // therefore I need to verify if it is there.
+
+    votes = 0;
+
+    for (unsigned int i = 0; i < m_Size; i++)
+        if (m_Data[i] == candidate)
+            votes++;
+
+    return (votes > m_Size / 2 ? candidate : -1);
+}
+
+
+// Task # 06: Number Of Subarrays That Sums to K
+int ArrayList::CountSubArrSum(int k)
+{
+    int subArrayCount = 0;
+    int sum = 0;
+
+    for (int i = 0; i < m_Size; i++)
+    {
+        sum = m_Data[i];
+
+        if (sum == k) // Subarray of length 1
+            subArrayCount++;
+
+        for (int j = i + 1; j < m_Size; j++)
+        {
+            sum += m_Data[j];
+            
+            if (sum == k)
+                subArrayCount++;
+        }
+    }
+
+    return subArrayCount;
+}
+
+
+// Task # 07: Longest Subarray with Sum ≤ K
+int ArrayList::GetLongestSubArrayLen(int k)
+{
+    int sum = 0;
+    int prevLen = 0;
+    int currLen = 0;
+
+    for (int i = 0; i < m_Size && prevLen < (m_Size - i); i++)
+    {
+        sum = m_Data[i];
+
+        for (int j = i + 1; j < m_Size; j++)
+        {
+            sum += m_Data[j];
+
+            if (sum <= k)
+                currLen = j - i + 1;
+        }
+
+        if (prevLen < currLen)
+            prevLen = currLen;
+
+        currLen = 0;
+    }
+
+    return prevLen;
 }

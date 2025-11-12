@@ -77,6 +77,12 @@ void ArrayList::DeleteValueAt(unsigned int index)
 }
 
 
+void ArrayList::Clear()
+{
+    m_Size = 0;
+}
+
+
 void ArrayList::Print()
 {
     std::cout << "List: [";
@@ -91,7 +97,8 @@ void ArrayList::Print()
 unsigned int ArrayList::Search(int value)
 {
     for (unsigned int i = 0; i < m_Size; i++)
-        if (m_Data[i] == value) return i;
+        if (m_Data[i] == value)
+            return i;
 
     return -1; // value not found
 }
