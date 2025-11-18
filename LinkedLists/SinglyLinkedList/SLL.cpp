@@ -2,9 +2,9 @@
 
 
 Node::Node(int data, Node* next)
+    : next(next)
 {
     this->data = data;
-    this->next = next;
 }
 
 
@@ -98,14 +98,14 @@ void SLL::Delete(int target)
 {
     if (!m_Head)
     {
-        std::cout << "Delete]: List Underflow!" << std::endl;
+        std::cout << "[Delete]: List Underflow!" << std::endl;
         return;
     }
 
     Node* curr = m_Head;
     Node* prev = nullptr;
 
-    if (curr->data == target)
+    if (m_Head->data == target)
     {
         m_Head = m_Head->next;
         delete curr;

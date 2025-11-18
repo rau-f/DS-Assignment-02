@@ -108,7 +108,7 @@ void SLL::RemoveNodeFromEnd(int n)
         return;
     }
 
-    this->Delete(Search(m_Size - n)->data);
+    Delete(Search(m_Size - n)->data);
 }
 
 
@@ -154,21 +154,21 @@ void SLL::Reorder()
         tN = tN->next;
     }
     
-    this->Clear();
+    Clear();
 
     Node* tN1 = firstHalf.GetHead();
     Node* tN2 = secHalf.GetHead();
 
     while (tN1 && tN2)
     {
-        this->Append(tN1->data);
-        this->Append(tN2->data);
+        Append(tN1->data);
+        Append(tN2->data);
 
         tN1 = tN1->next;
         tN2 = tN2->next;
     }
     
-    if (tN2) this->Append(tN2->data);
+    if (tN2) Append(tN2->data);
 }
 
 
@@ -207,7 +207,7 @@ void SLL::ReverseKElem(int k)
 
     if (m_Size == k)
     {
-        this->Reverse();
+        Reverse();
         return;
     }
 
@@ -227,7 +227,7 @@ void SLL::ReverseKElem(int k)
         tN = tN->next;
     }
     
-    this->Clear();
+    Clear();
     tN = m_Head;
 
     kList.Reverse();
@@ -235,14 +235,14 @@ void SLL::ReverseKElem(int k)
     tN = kList.GetHead();
     while (tN)
     {
-        this->Append(tN->data);
+        Append(tN->data);
         tN = tN->next;
     }
     
     tN = leftOver.GetHead();
     while (tN)
     {
-        this->Append(tN->data);
+        Append(tN->data);
         tN = tN->next;
     }
 }
