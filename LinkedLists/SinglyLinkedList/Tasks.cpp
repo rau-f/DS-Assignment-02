@@ -4,7 +4,7 @@
 // Task # 01: Reverse Linked List
 Node* SLL::Reverse()
 {
-    if (IsEmpty())
+    if (!m_Head)
     {
         std::cout << "list underflow!" << std::endl;
         return nullptr;
@@ -78,8 +78,171 @@ Node* SLL::Merge(Node* tN2)
 }
 
 
+// Task # 03: Middle of the Linked List
+Node* SLL::FindMiddleNode()
+{
+    int size = 0;
+    Node* tN = m_Head;
+
+    while (tN)
+    {
+        size++;
+        tN = tN->next;
+    }
+
+    tN = m_Head;
+    
+    for (int i = 0; i < size / 2; i++)
+        tN = tN->next;
+
+    return tN;
+}
+
+
+// Task # 04: Remove Nth node from end
+void SLL::RemoveNodeFromEnd(int n)
+{
+    if (!m_Head)
+    {
+        std::cout << "RemoveNFE]: List underflow!" << std::endl;
+        return;
+    }
+
+    this->Delete(Search(m_Size - n)->data);
+}
+
+
 // Task # 05: Linked List Cycle Detection
 bool SLL::DetectCycle()
 {
+    Node* addreses[m_Size];
+    Node* tN = m_Head;
+
+    for (int i = 0; i < m_Size; i++)
+    {
+        addreses[i] = tN;
+        tN = tN->next;
+    }
+
+    for (int i = 0; i < m_Size; i++)
+        for (int j = i + 1; j < m_Size; j++)
+        {
+            if (addreses[i] == addreses[j])
+                return true;
+        }
+
+    return false;
+}
+
+
+// Task # 07: Reorder List
+void SLL::Reorder()
+{
+    Node* tN = m_Head;
+
+    SLL firstHalf;
+    SLL secHalf;
+
+    for (int i = 0; i < m_Size / 2; i++, tN = tN->next)
+    {
+        firstHalf.Append(tN->data);
+    }
+
+    while (tN)
+    {
+        secHalf.Append(tN->data);
+        tN = tN->next;
+    }
     
+    this->Clear();
+
+    Node* tN1 = firstHalf.GetHead();
+    Node* tN2 = secHalf.GetHead();
+
+    while (tN1 && tN2)
+    {
+        this->Append(tN1->data);
+        this->Append(tN2->data);
+
+        tN1 = tN1->next;
+        tN2 = tN2->next;
+    }
+    
+    if (tN2) this->Append(tN2->data);
+}
+
+
+// Task # 08: Remove Duplicates from Sorted List
+void SLL::RemoveDupFromSortedList()
+{
+    if (m_Size < 1) return;
+
+    Node* curr = m_Head;
+    Node* nextNode = curr->next;
+
+    while (nextNode)
+    {
+        if (curr->data == nextNode->data)
+        {
+            Node* temp = nextNode->next;
+            delete nextNode;
+            m_Size--;
+
+            curr->next = nextNode = temp;
+        }
+        else
+        {
+            curr = nextNode;
+            nextNode = nextNode->next;
+        }
+    }
+}
+
+
+// Task # 09: Reverse Nodes in k-Group
+void SLL::ReverseKElem(int k)
+{
+    if (!m_Size || !k || k == 1)
+        return;
+
+    if (m_Size == k)
+    {
+        this->Reverse();
+        return;
+    }
+
+    Node* tN = m_Head;
+    SLL kList;
+    SLL leftOver;
+
+    for (int i = 0; i < k; i++)
+    {
+        kList.Append(tN->data);
+        tN = tN->next;
+    }
+
+    while (tN)
+    {
+        leftOver.Append(tN->data);
+        tN = tN->next;
+    }
+    
+    this->Clear();
+    tN = m_Head;
+
+    kList.Reverse();
+
+    tN = kList.GetHead();
+    while (tN)
+    {
+        this->Append(tN->data);
+        tN = tN->next;
+    }
+    
+    tN = leftOver.GetHead();
+    while (tN)
+    {
+        this->Append(tN->data);
+        tN = tN->next;
+    }
 }
