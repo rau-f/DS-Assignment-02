@@ -23,10 +23,7 @@ DLL::~DLL()
 void DLL::Clear()
 {
     if (!m_Head)
-    {
-        std::cout << "[Clear]: List Empty!" << std::endl;
         return;
-    }
 
     Node* tN = m_Head->next;
     Node* temp = nullptr;

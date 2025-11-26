@@ -48,7 +48,8 @@ public:
     void DelOuccKey(int key);
     void PrintPairs(int sum);
     void RotateByN(int n);
-    DLL* Merge(DLL &list2);
+    void Merge(DLL &list2);
     // Task 06 pending till trees
     void FindTripletsSumToK(int k);
+    void MergeKSortedLists(int k);
 };

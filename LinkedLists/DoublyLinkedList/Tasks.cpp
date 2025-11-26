@@ -112,46 +112,68 @@ void DLL::RotateByN(int n)
 
 
 // Task # 05: Merge Two Sorted Doubly Linked Lists
-DLL* DLL::Merge(DLL &list2)
+void DLL::Merge(DLL &list2)
 {
-    if (!m_Head && !list2.GetHead())
+    Node* tN1 = m_Head;
+    Node* tN2 = list2.m_Head;
+
+    if (!tN1)
     {
-        std::cout << "[Merge]: Both lists empty!" << std::endl;
-        return nullptr;
+        m_Head = tN2;
+        list2.m_Head = nullptr;
+        return;
     }
 
-    Node* tN1 = m_Head;
-    Node* tN2 = list2.GetHead();
+    if (!tN2)
+        return;
 
-    DLL* newList = new DLL();
+    bool wasCircular = IsCircular();
+    BreakCircle();
+
+    Node* newHead = nullptr;
+    Node* tail = nullptr;
 
     while (tN1 && tN2)
     {
+        Node* smallest;
         if (tN1->data < tN2->data)
         {
-            newList->Append(tN1->data);
+            smallest = tN1;
             tN1 = tN1->next;
         }
         else
         {
-            newList->Append(tN2->data);
+            smallest = tN2;
             tN2 = tN2->next;
+        }
+
+        if (!newHead)
+        {
+            newHead = smallest;
+            tail = smallest;
+            tail->prev = nullptr; 
+        }
+        else
+        {
+            tail->next = smallest;
+            smallest->prev = tail;
+            tail = smallest;
         }
     }
 
-    while (tN1)
+    if (tN2)
     {
-        newList->Append(tN1->data);
-        tN1 = tN1->next;
+
     }
 
-    while (tN2)
-    {
-        newList->Append(tN2->data);
-        tN2 = tN2->next;
-    }
+    m_Head = newHead;
+    m_Size += list2.m_Size;
 
-    return newList;
+    if (wasCircular)
+        MakeCircular();
+
+    list2.m_Head = nullptr;
+    list2.m_Tail = nullptr;
 }
 
 
@@ -196,4 +218,29 @@ void DLL::FindTripletsSumToK(int k)
 
     if (wasCircular)
         MakeCircular();
+}
+
+
+// Task # 08: Merge K Sorted Doubly Linked Lists
+void DLL::MergeKSortedLists(int k)
+{
+    DLL* lists = new DLL[k];
+
+    srand(time(NULL));
+    for (int i = 0; i < k; i++)
+    {
+        int size = (rand() % 4) + 2;
+        for (int j = 0; j < size; j++)
+        {
+            lists[i].Append(rand() % 10);
+        }
+        
+        lists[i].Sort();
+        lists[i].Print();
+    }
+    
+    for (int i = 0; i < k; i++)
+    {
+        Merge(lists[i]);
+    }
 }
