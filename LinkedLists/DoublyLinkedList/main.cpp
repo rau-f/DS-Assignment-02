@@ -5,11 +5,11 @@
 int main()
 {
     DLL list;
-    const int size = 4;
+    const int size = 8;
 
     srand(time(NULL));
     for (int i = 0; i < size; i++)
-        list.Append(rand() % 7);
+        list.Append(rand() % 8);
 
 
     // Task # 01: Insert a Node in a Sorted Doubly Linked List
@@ -67,6 +67,17 @@ int main()
     // }
 
     // Task # 06: Convert Binary Tree to Doubly Linked List
+    // Pending till trees...
+
+    // Task # 07: Find Triplets with Given Sum in a Sorted Doubly LinkedList
+    {
+        list.Sort();
+        list.Print();
+        int k;
+        std::cout << "Enter k: ";
+        std::cin >> k;
+        list.FindTripletsSumToK(k);
+    }
 
     return 0;
 }

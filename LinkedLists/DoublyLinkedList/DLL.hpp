@@ -49,5 +49,6 @@ public:
     void PrintPairs(int sum);
     void RotateByN(int n);
     DLL* Merge(DLL &list2);
-    /* Continue Task 06 */
+    // Task 06 pending till trees
+    void FindTripletsSumToK(int k);
 };

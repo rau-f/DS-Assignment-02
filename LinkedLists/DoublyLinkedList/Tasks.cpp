@@ -111,7 +111,7 @@ void DLL::RotateByN(int n)
 }
 
 
-// Task # 04: Merge Two Sorted Doubly Linked Lists
+// Task # 05: Merge Two Sorted Doubly Linked Lists
 DLL* DLL::Merge(DLL &list2)
 {
     if (!m_Head && !list2.GetHead())
@@ -156,3 +156,44 @@ DLL* DLL::Merge(DLL &list2)
 
 
 // Task # 06: Convert Binary Tree to Doubly Linked List
+// Pending...
+
+
+// Task # 07: Find Triplets with Given Sum in a Sorted Doubly Linked List
+void DLL::FindTripletsSumToK(int k)
+{
+    if (m_Size < 3) return;
+
+    bool wasCircular = IsCircular();
+    BreakCircle();
+
+    int sum = 0;
+
+    for (Node* i = m_Head; i != nullptr; i = i->next)
+    {
+        Node* left = i->next;
+        Node* right = m_Tail;
+
+        while (left != right && right->next != left)
+        {
+            sum = i->data + left->data + right->data;
+            
+            if (sum == k)
+            {
+                std::cout << "(" << i->data << ", " << left->data << ", " << right->data << ")" << std::endl;
+                left = left->next;
+                right = right->prev;
+            }
+            else if (sum < k)
+                left = left->next;
+            else
+                right = right->prev;
+
+            sum = 0;
+        }
+        
+    }
+
+    if (wasCircular)
+        MakeCircular();
+}
