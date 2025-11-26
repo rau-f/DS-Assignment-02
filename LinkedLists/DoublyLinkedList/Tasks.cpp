@@ -114,66 +114,66 @@ void DLL::RotateByN(int n)
 // Task # 05: Merge Two Sorted Doubly Linked Lists
 void DLL::Merge(DLL &list2)
 {
-    Node* tN1 = m_Head;
-    Node* tN2 = list2.m_Head;
-
-    if (!tN1)
+    if (!m_Head)
     {
-        m_Head = tN2;
+        m_Head = list2.m_Head;
+        m_Tail = list2.m_Tail;
+        m_Size = list2.m_Size;
         list2.m_Head = nullptr;
+        list2.m_Tail = nullptr;
+        list2.m_Size = 0;
         return;
     }
 
-    if (!tN2)
+    if (!list2.m_Head)
         return;
+    
+    this->BreakCircle();
+    list2.BreakCircle();
 
-    bool wasCircular = IsCircular();
-    BreakCircle();
+    Node dummy(0);
+    Node* last = &dummy;
+    
+    Node* a = m_Head;
+    Node* b = list2.m_Head;
 
-    Node* newHead = nullptr;
-    Node* tail = nullptr;
-
-    while (tN1 && tN2)
+    while (a && b)
     {
-        Node* smallest;
-        if (tN1->data < tN2->data)
+        if (a->data <= b->data)
         {
-            smallest = tN1;
-            tN1 = tN1->next;
+            last->next = a;
+            a->prev = last;
+            a = a->next;
         }
         else
         {
-            smallest = tN2;
-            tN2 = tN2->next;
+            last->next = b;
+            b->prev = last;
+            b = b->next;
         }
 
-        if (!newHead)
-        {
-            newHead = smallest;
-            tail = smallest;
-            tail->prev = nullptr; 
-        }
-        else
-        {
-            tail->next = smallest;
-            smallest->prev = tail;
-            tail = smallest;
-        }
+        last = last->next;
     }
 
-    if (tN2)
+    Node* rest = (a ? a : b);
+
+    if (rest)
     {
+        last->next = rest;
+        rest->prev = last;
 
+        while (last->next)
+            last = last->next;
     }
 
-    m_Head = newHead;
+    m_Head = dummy.next;
+    m_Tail = last;
     m_Size += list2.m_Size;
-
-    if (wasCircular)
-        MakeCircular();
+    m_Head->prev = nullptr;
 
     list2.m_Head = nullptr;
     list2.m_Tail = nullptr;
+    list2.m_Size = 0;
 }
 
 
@@ -244,3 +244,6 @@ void DLL::MergeKSortedLists(int k)
         Merge(lists[i]);
     }
 }
+
+
+// Task # 09: Reverse Doubly Linked List in Groups of K

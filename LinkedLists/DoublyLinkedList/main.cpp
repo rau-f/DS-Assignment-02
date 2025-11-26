@@ -54,17 +54,17 @@ int main()
     // }
 
     // Task # 05: Merge Two Sorted Doubly Linked Lists
-    {
-        DLL list2;
-        for (int i = 0; i < size; i++)
-            list2.Append(rand() % 7);
-        list.Sort();
-        list2.Sort();
-        list.Print();
-        list2.Print();
-        list.Merge(list2);
-        list.Print();
-    }
+    // {
+    //     DLL list2;
+    //     for (int i = 0; i < size; i++)
+    //         list2.Append(rand() % 7);
+    //     list.Sort();
+    //     list2.Sort();
+    //     list.Print();
+    //     list2.Print();
+    //     list.Merge(list2);
+    //     list.Print();
+    // }
 
     // Task # 06: Convert Binary Tree to Doubly Linked List
     // Pending till trees...
@@ -80,13 +80,14 @@ int main()
     // }
 
     // Task # 08: Merge K Sorted Doubly Linked Lists
-    // {
-    //     list.Print();
-    //     int k;
-    //     std::cout << "Enter k: ";
-    //     std::cin >> k;
-    //     list.MergeKSortedLists(k);
-    //     list.Print();
-    // }
+    {
+        list.Print();
+        int k;
+        std::cout << "Enter k: ";
+        std::cin >> k;
+        list.MergeKSortedLists(k);
+        list.Print();
+    }
+    
     return 0;
 }
