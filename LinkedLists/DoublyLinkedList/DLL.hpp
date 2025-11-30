@@ -52,4 +52,6 @@ public:
     // Task 06 pending till trees
     void FindTripletsSumToK(int k);
     void MergeKSortedLists(int k);
+    void ReverseInGroups(int k);
+    void SplitCircularIntoHalves(DLL& list1, DLL& list2);
 };

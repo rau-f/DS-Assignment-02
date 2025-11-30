@@ -5,7 +5,7 @@
 int main()
 {
     DLL list;
-    const int size = 4;
+    const int size = 8;
 
     srand(time(NULL));
     for (int i = 0; i < size; i++)
@@ -80,14 +80,37 @@ int main()
     // }
 
     // Task # 08: Merge K Sorted Doubly Linked Lists
-    {
-        list.Print();
-        int k;
-        std::cout << "Enter k: ";
-        std::cin >> k;
-        list.MergeKSortedLists(k);
-        list.Print();
-    }
+    // {
+    //     list.Print();
+    //     int k;
+    //     std::cout << "Enter k: ";
+    //     std::cin >> k;
+    //     list.MergeKSortedLists(k);
+    //     list.Print();
+    // }
     
+    // Task # 09: Reverse Doubly Linked List in Groups of K
+    // {
+    //     list.Print();
+    //     int k;
+    //     std::cout << "Enter k: ";
+    //     std::cin >> k;
+    //     list.ReverseInGroups(k);
+    //     list.Print();
+    // }
+
+    // Task # 10: Split a Circular Doubly Linked List into Two Halves
+    {
+        DLL list1;
+        DLL list2;
+
+        list.Print();
+        list.MakeCircular();
+        list.SplitCircularIntoHalves(list1, list2);
+
+        list1.Print();
+        list2.Print();
+    }
+
     return 0;
 }

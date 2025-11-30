@@ -186,7 +186,7 @@ void DLL::Print()
     std::cout << "[";
     do
     {
-        std::cout << tN->data << (i == m_Size - 1 ? "]" : ", ");
+        std::cout << tN->data << (i == m_Size - 1 ? "]" : " ⇄ ");
         i++;
         tN = tN->next;
     } while (tN != m_Tail->next);

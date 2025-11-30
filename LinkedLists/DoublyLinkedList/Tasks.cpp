@@ -247,3 +247,113 @@ void DLL::MergeKSortedLists(int k)
 
 
 // Task # 09: Reverse Doubly Linked List in Groups of K
+void DLL::ReverseInGroups(int k)
+{
+    if (k <= 1 || !m_Head) return;
+    
+    Node* current = m_Head;
+    Node* prevTail = nullptr;
+    Node* newHead = nullptr;
+    
+    while (current) {
+        Node* groupStart = current;
+        int count = 0;
+        
+        // Count k nodes
+        while (current && count < k)
+        {
+            current = current->next;
+            count++;
+        }
+        
+        if (count < k)
+        {
+            // Connect remaining nodes
+            if (prevTail)
+                prevTail->next = groupStart;
+            else
+                newHead = groupStart;
+            if (groupStart)
+                groupStart->prev = prevTail;
+
+            break;
+        }
+        
+        // Reverse k nodes
+        Node* prev = nullptr;
+        Node* temp = groupStart;
+
+        for (int i = 0; i < k; i++)
+        {
+            Node* next = temp->next;
+            temp->next = prev;
+            temp->prev = next;
+            if (prev) prev->prev = temp;
+            prev = temp;
+            temp = next;
+        }
+        
+        // Connect with previous group
+        if (prevTail)
+        {
+            prevTail->next = prev;
+            prev->prev = prevTail;
+        }
+        else
+            newHead = prev;
+
+        prevTail = groupStart;
+    }
+    
+    m_Head = newHead;
+    
+    // Update tail
+    m_Tail = m_Head;
+
+    while (m_Tail && m_Tail->next)
+        m_Tail = m_Tail->next;
+}
+
+
+// Task # 10: Split a Circular Doubly Linked List into Two Halves
+void DLL::SplitCircularIntoHalves(DLL& list1, DLL& list2)
+{
+    if (!m_Head || !IsCircular())
+    {
+        list1 = *this;
+        return;
+    }
+
+    int count = m_Size;
+
+    // Find middle node
+    Node* middle = m_Head;
+    for (int i = 0; i < count / 2 - 1; i++)
+    {
+        middle = middle->next;
+    }
+
+    Node* firstHead = m_Head;
+    Node* secondHead = middle->next;
+
+    // Make first half circular
+    middle->next = firstHead;
+    firstHead->prev = middle;
+
+    // Make second half circular
+    Node* tail = m_Tail;
+    tail->next = secondHead;
+    secondHead->prev = tail;
+
+    // Set up the two lists
+    list1.SetHead(firstHead);
+    list1.SetTail(middle);
+    list1.m_Size = count / 2;
+
+    list2.SetHead(secondHead);
+    list2.SetTail(tail);
+    list2.m_Size = m_Size - count / 2;
+
+    m_Head = m_Tail = nullptr;
+    m_Size = 0;
+}
