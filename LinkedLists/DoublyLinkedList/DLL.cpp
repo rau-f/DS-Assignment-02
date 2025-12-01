@@ -113,7 +113,6 @@ void DLL::Delete(int target)
         return;
     }
 
-
     if (toDelete->next)
         toDelete->next->prev = toDelete->prev;
     
