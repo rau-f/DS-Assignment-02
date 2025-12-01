@@ -77,7 +77,6 @@ void StackArray::RemoveMiddle(int bottom)
 // Task # 06: Balanced Parenthesis
 bool StackArray::CheckParenthesis(int curr)
 {
-    
 }
 
 
