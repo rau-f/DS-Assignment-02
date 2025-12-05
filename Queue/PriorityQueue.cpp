@@ -67,9 +67,9 @@ int PriorityQueue::Dequeue()
         int right = (2 * i) + 2;
         int bigger = i;
 
-        if (left < m_Size && m_Data[left].pr > m_Data[bigger].pr)
+        if (left < m_Size && m_Data[left].pr > m_Data[i].pr)
             bigger = left;
-        if (right < m_Size && m_Data[right].pr > m_Data[bigger].pr)
+        if (right < m_Size && m_Data[right].pr > m_Data[i].pr)
             if (m_Data[right].pr > m_Data[left].pr)
                 bigger = right;
 
