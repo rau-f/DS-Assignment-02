@@ -69,13 +69,14 @@ int PriorityQueue::Dequeue()
 
         if (left < m_Size && m_Data[left].pr > m_Data[bigger].pr)
             bigger = left;
-        else if (right < m_Size && m_Data[right].pr > m_Data[bigger].pr)
-            bigger = right;
+        if (right < m_Size && m_Data[right].pr > m_Data[bigger].pr)
+            if (m_Data[right].pr > m_Data[left].pr)
+                bigger = right;
 
         if (bigger == i)
             break;
 
-        Swap(m_Data[i], m_Data[bigger]);
+        std::swap(m_Data[i], m_Data[bigger]);        
         i = bigger;
     }
 
