@@ -29,13 +29,6 @@ void PriorityQueue::Enqueue(int value, int pr)
         return;
     }
 
-    if(IsEmpty())
-    {
-        m_Data[m_Size] = {value, pr};
-        m_Size++;
-        return;
-    }
-
     m_Data[m_Size] = {value, pr};
     m_Size++;
 
@@ -67,16 +60,15 @@ int PriorityQueue::Dequeue()
         int right = (2 * i) + 2;
         int bigger = i;
 
-        if (left < m_Size && m_Data[left].pr > m_Data[i].pr)
+        if (left < m_Size && m_Data[left].pr > m_Data[bigger].pr)
             bigger = left;
-        if (right < m_Size && m_Data[right].pr > m_Data[i].pr)
-            if (m_Data[right].pr > m_Data[left].pr)
-                bigger = right;
+        if (right < m_Size && m_Data[right].pr > m_Data[bigger].pr)
+            bigger = right;
 
         if (bigger == i)
             break;
 
-        std::swap(m_Data[i], m_Data[bigger]);        
+        Swap(m_Data[i], m_Data[bigger]);        
         i = bigger;
     }
 
