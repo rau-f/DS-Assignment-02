@@ -4,12 +4,12 @@
 
 struct Node
 {
-    int key;
+    int data;
     int height;
     Node* left;
     Node* right;
 
-    Node(int key, int height = 0, Node* left = nullptr, Node* right = nullptr);
+    Node(int data, int height = 0, Node* left = nullptr, Node* right = nullptr);
 };
 
 
@@ -18,12 +18,18 @@ class AVL
 private:
     Node* m_Root;
 
-    Node* m_Insert(Node* root, int key);
+    Node* m_Insert(Node* root, int data);
     Node* m_Delete(Node* root, int target);
+
+    Node* m_RotateLeft(Node* node);
+    Node* m_RotateRight(Node* node);
 
 public:
     AVL();
 
-    void Insert(int key);
+    void Insert(int data);
     void Delete(int target);
+
+    int GetHeight(Node* node);
+    int GetBalance(Node* node);
 };
