@@ -13,7 +13,7 @@ AVL::AVL()
 }
 
 
-Node* AVL::m_Insert(Node* root, int data)
+Node* AVL::m_Insert(Node* root, int& data)
 {
     if (!root)
         return new Node(data);
@@ -79,9 +79,67 @@ Node* AVL::m_RotateRight(Node* p)
 }
 
 
-Node* AVL::m_Delete(Node* root, int data)
+Node* AVL::m_Delete(Node* root, int& target)
 {
+    if (!root) return nullptr;
+
+    if (target < root->data)
+        root->left = m_Delete(root->left, target);
+    else if (target > root->data)
+        root->right = m_Delete(root->right, target);
+    else
+    {
+        if (!root->right)
+        {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        if (!root->left)
+        {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        }
+
+        Node* temp = m_GetMin(root->right);
+        root->data = temp->data;
+        root->right = m_Delete(root->right, root->data);
+    }
+
+    if (!root) return root;
     
+    root->height = 1 + std::max(GetHeight(root->left), GetHeight(root->right));
+    int balance = GetBalance(root);
+
+    if (balance > 1 && GetBalance(root->left) >= 0)
+        return m_RotateRight(root);
+
+    if (balance > 1 && GetBalance(root->left) < 0)
+    {
+        root->left = m_RotateLeft(root->left);
+        return m_RotateRight(root);
+    }
+    
+    if (balance < -1 && GetBalance(root->right) <= 0)
+        return m_RotateLeft(root);
+    
+    if (balance < -1 && GetBalance(root->right) > 0)
+    {
+        root->right = m_RotateRight(root->right);
+        return m_RotateLeft(root);
+    }
+    return root;
+}
+
+
+Node* AVL::m_GetMin(Node* node)
+{
+    while (!node && !node->left)
+        node = node->left;
+
+    return node;
 }
 
 

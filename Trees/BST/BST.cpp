@@ -55,13 +55,13 @@ Node* BST::m_Delete(Node* root, int &target)
             delete root;
             return node;
         }
-        else
-        {
-            Node* node = m_FindMin(root->right);
-            root->key = node->key;
-            node->right = m_Delete(root->right, node->key);
-        }
+    
+        Node* node = m_FindMin(root->right);
+        root->key = node->key;
+        node->right = m_Delete(root->right, node->key);
     }
+
+    return root;
 }
 
 

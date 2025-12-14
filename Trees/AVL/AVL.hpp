@@ -18,11 +18,13 @@ class AVL
 private:
     Node* m_Root;
 
-    Node* m_Insert(Node* root, int data);
-    Node* m_Delete(Node* root, int target);
+    Node* m_Insert(Node* root, int& data);
+    Node* m_Delete(Node* root, int& target);
 
     Node* m_RotateLeft(Node* node);
     Node* m_RotateRight(Node* node);
+
+    Node* m_GetMin(Node* node);
 
 public:
     AVL();
